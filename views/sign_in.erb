@@ -1,0 +1,31 @@
+<form action="/signin" method ="post">
+    <div class="login_form">
+        <div class="name">
+            <input type="text" name="userid" placeholder="ユーザー名" class="input_user"><br>
+        </div>
+        <div class="password">
+            <input type="password" name="password" placeholder="パスワード" class="input_user"><br>
+        </div>
+        <p class="p_error_loginout">　</p>
+        <div>            
+            <input class="btn_signin_submit" type="submit" value="ログイン">
+        </div>
+    </div>
+</form>
+
+<script>
+$(function() {
+    function isAlphanumeric(text) {
+        const alphanumericRegex = /^\w+$/;
+        return alphanumericRegex.test(text);
+    }
+    
+    $('.input_user').on('change', function() {
+        if (!isAlphanumeric(this.value)) {
+            $('.p_error_loginout').text('ユーザー名、パスワードは英数字のみ入力できます');
+        }else{
+            $('.p_error_loginout').text('');
+        }
+    });
+});
+</script>

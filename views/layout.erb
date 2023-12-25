@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タイトル</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://kit.fontawesome.com/db19f14c78.js" crossorigin="anonymous"></script>
+  
+       <!--jQuery.jsの読み込み -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+<script src="assets/js/script.js"></script>
+        
+</head>
+<body>
+    
+      <h1>反省 サークル</h1>
+    <div class="session_container">
+        <% unless session[:user] %>
+            <div class="session_outer">
+                <a href="/signin" class="btn_signin">ログイン</button> 
+                <a href="/signup" class="btn_signup">新規登録</a>
+            </div>
+        <% else %>
+            <div class="session_outer">
+                <h2><%= current_user.userid %>さん</h2>            
+                <a href="/signout" class="btn_signout">ログアウト</a>
+            </div>
+        <% end %>
+    </div>
+
+
+  
+    <%= yield %>
+
+<% if session[:user] %>
+  <div class="div_new_button">
+      <a href="/new"><i class="fa-solid fa-plus fa-3x"></i></a>
+  </div>
+ <% end %>
+ 
+  
+</body>
+</html>

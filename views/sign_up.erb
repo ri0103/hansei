@@ -1,0 +1,34 @@
+<form action="/signup" method ="post">
+    <div class="signup_form">
+        <div class="name">
+            <input type="text" name="userid" placeholder="ユーザー名" class="input_user"><br>
+        </div>
+        <div class="password">
+            <input type="password" name="password" placeholder="パスワード" class="input_user"><br>
+        </div>
+        <div class="password_confirmation">
+            <input type="password" name="password_confirmation" placeholder="パスワードの確認" class="input_user"><br>
+        </div>
+        <p class="p_error_loginout">　</p>
+        <div>
+            <input class="btn_signup_submit" type="submit" value="新規登録">
+        </div>
+    </div>
+</form>
+
+<script>
+$(function() {
+    function isAlphanumeric(text) {
+        const alphanumericRegex = /^\w+$/;
+        return alphanumericRegex.test(text);
+    }
+    
+    $('.input_user').on('change', function() {
+        if (!isAlphanumeric(this.value)) {
+            $('.p_error_loginout').text('ユーザー名、パスワードは英数字のみ入力できます');
+        }else{
+            $('.p_error_loginout').text('');
+        }
+    });
+});
+</script>

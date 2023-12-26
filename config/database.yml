@@ -12,7 +12,7 @@
 default_env: &default
   adapter: postgresql
   encoding: unicode
-  database: s_original
+  database: c_original
 
 development:
   <<: *default

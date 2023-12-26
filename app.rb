@@ -7,6 +7,7 @@ require 'httparty'
 require 'json'
 require 'net/http'
 require 'dotenv'
+require 'active_record'
 Dotenv.load
 
 enable :sessions
@@ -19,6 +20,9 @@ helpers do
     def posts
         Post.all
     end
+    
+    
+    
 end
 
 OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci-codex/completions'
@@ -26,6 +30,7 @@ OPENAI_API_URL = 'https://api.openai.com/v1/engines/davinci-codex/completions'
 
 get '/' do
     session[:test]
+    @posts = Post.order(created_at: :desc)
     erb :index
 end
 
@@ -76,28 +81,25 @@ post '/new' do
     req['Authorization'] = "Bearer " + ENV['OPENAI_API_KEY']
     req['Content-Type'] = 'application/json'
     
-    if params[:emotional_step_select] == "kind" 
-        req.body = JSON.dump({
-        'messages': [{ 'role': 'user', 
-            'content': "「" + params[:content_set] + "」という反省文に対して、フィードバックを一行で書いてください。また、優しく励ましてください"
-            }],
-            'model': 'gpt-3.5-turbo',
-        })
-    elsif params[:emotional_step_select] == "angry"
-        req.body = JSON.dump({
-        'messages': [{ 'role': 'user', 
-            'content': "「" + params[:content_set] + "」という反省文に対して、フィードバックを一行で書いてください。この行動に対して厳しく叱り、命令口調でお願いします"
-            }],
-            'model': 'gpt-3.5-turbo',
-        })
-    else
-        req.body = JSON.dump({
-        'messages': [{ 'role': 'user', 
-            'content': "「" + params[:content_set] + "」という反省文に対して、フィードバックを一行で書いてください。"
-            }],
-            'model': 'gpt-3.5-turbo',
-        })
-    end
+    
+    req.body = JSON.dump({
+    'messages': [
+        {
+        "role": "system",
+        "content": 
+        if params[:emotional_step_select] == "kind" 
+        "送る反省文を読んでください。そして、それに対してフィードバックを一行で書いてください。その行動を肯定し、優しく励ましてください"
+        elsif params[:emotional_step_select] == "angry"
+        "送る反省文を読んでください。そして、それに対してフィードバックを一行で書いてください。その行動を厳しく叱り、命令口調で罵倒してください"
+        else
+        "送る反省文を読んでください。そして、それに対してフィードバックを一行で書いてください。"
+        end
+        },
+        { 'role': 'user', 
+        'content': params[:content_set]
+        }],
+        'model': 'gpt-3.5-turbo',
+    })
     
 
     Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
@@ -166,9 +168,29 @@ get '/dislike' do
     end
 end
 
-get '/delete/:id' do
-    posts.find(params[:id]).delete
-    redirect '/'
+delete '/delete/:id' do
+
+  post = Post.find_by(id: params[:id])
+
+  if post
+    # 投稿が存在する場合、削除を試みる
+    if post.destroy
+      # 削除成功
+      content_type :json
+      { success: true }.to_json
+    else
+      # 削除失敗
+      status 500
+      content_type :json
+      { success: false, error: "削除に失敗しました" }.to_json
+    end
+  else
+    # 投稿が見つからない場合
+    status 404
+    content_type :json
+    { success: false, error: "投稿が見つかりません" }.to_json
+  end
+  
 end
 
 

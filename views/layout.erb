@@ -6,8 +6,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>タイトル</title>
+  <title>反省サークル</title>
   <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/logon.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&family=Shippori+Mincho+B1:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <script src="https://kit.fontawesome.com/db19f14c78.js" crossorigin="anonymous"></script>
   
        <!--jQuery.jsの読み込み -->
@@ -18,17 +24,19 @@
 </head>
 <body>
     
-      <h1>反省 サークル</h1>
+     <a href="/" class="title">反省 サークル</a>
     <div class="session_container">
         <% unless session[:user] %>
-            <div class="session_outer">
-                <a href="/signin" class="btn_signin">ログイン</button> 
-                <a href="/signup" class="btn_signup">新規登録</a>
+            <div class="session_outer flex_center">
+                <div class="fill_blank"></div>
+                <a href="/signin"><i class="fa-solid fa-right-to-bracket fa-xl" style="color: #d9d7d7;"></i></a> 
             </div>
         <% else %>
-            <div class="session_outer">
-                <h2><%= current_user.userid %>さん</h2>            
-                <a href="/signout" class="btn_signout">ログアウト</a>
+            <div class="session_outer flex_center">
+                <p class="profile_icon"><i class="fa-regular fa-user fa-xl"></i></p>
+                <p class="profile_name"><%= current_user.userid %></p> 
+                <div class="fill_blank"></div>
+                <a href="/signout" class="btn_signout"><i class="fa-solid fa-right-from-bracket fa-xl" style="color: #d9d7d7;"></i></a>
             </div>
         <% end %>
     </div>
@@ -39,7 +47,7 @@
 
 <% if session[:user] %>
   <div class="div_new_button">
-      <a href="/new"><i class="fa-solid fa-plus fa-3x"></i></a>
+      <a href="/new"><i class="fa-solid fa-plus fa-3x" style="color:#d9d7d7;"></i></a>
   </div>
  <% end %>
  

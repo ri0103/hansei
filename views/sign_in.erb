@@ -1,16 +1,12 @@
 <form action="/signin" method ="post">
-    <div class="login_form">
-        <div class="name">
-            <input type="text" name="userid" placeholder="ユーザー名" class="input_user"><br>
-        </div>
-        <div class="password">
-            <input type="password" name="password" placeholder="パスワード" class="input_user"><br>
-        </div>
-        <p class="p_error_loginout">　</p>
-        <div>            
-            <input class="btn_signin_submit" type="submit" value="ログイン">
-        </div>
+<div class="logon_wrap">
+    <div class="logon_form">
+        <input type="text" name="userid" placeholder="ユーザー名" class="input_user"><br>
+        <input type="password" name="password" placeholder="パスワード" class="input_user"><br>
+        <input class="btn_signon_submit" type="submit" value="ログイン">
+        <a href="/signup" class="btn_signup">新規登録</a>
     </div>
+ </div>
 </form>
 
 <script>

@@ -1,44 +1,53 @@
-<% posts.each do |posteach| %>
-    <div class="div_post">
-        <div class="flex">
-            <p class="icon"><i class="fa-solid fa-user fa-2x"></i></p>
+<% @posts.each do |posteach| %>
+    <div class="div_post" id="post_<%= posteach.id %>">
+        <div class="flex_center">
+            <p class="icon"><i class="fa-solid fa-user"></i></p>
             <p class="user"><%= posteach.user.userid %></p>
         </div>
         <div class="post_wrap">
             <p class="content"><%= posteach.content %></p>
             <p class="feedback"><%= posteach.feedback %></p>
-            <div class="like_wrap flex">
+            
+            <div class="flex_center">
                 
-                <div class="action_button">
-                    <% if Like.find_by(user_id: session[:user], post_id: posteach.id) %>
-                    <a  data-id='<%= posteach.id %>'  class="like_button">
-                       <i class="fa-solid fa-face-laugh-squint fa-2x like_status_<%= posteach.id %>" style="color: #dbb93b;"></i>
-                    </a>
-                    <% else %>
-                    <a  data-id='<%= posteach.id %>'  class="like_button">
-                       <i class="fa-regular fa-face-laugh-squint fa-2x like_status_<%= posteach.id %>" style="color: #dbb93b;"></i>
-                    </a>
-                    <% end %>
+                <div class="like_wrap flex_center">
+                    <div class="action_button">
+                        <% if Like.find_by(user_id: session[:user], post_id: posteach.id) %>
+                        <a  data-id='<%= posteach.id %>'  class="like_button">
+                           <i class="fa-solid fa-thumbs-up fa-xl like_status_<%= posteach.id %>" style="color: #7891cc;"></i>
+                        </a>
+                        <% else %>
+                        <a  data-id='<%= posteach.id %>'  class="like_button">
+                           <i class="fa-regular fa-thumbs-up fa-xl like_status_<%= posteach.id %>" style="color: #7891cc;"></i>
+                        </a>
+                        <% end %>
+                    </div>
+                    <p class="like_count like_count_<%= posteach.id %>"><%= Like.where(post_id: posteach.id).count %></p>
+                        
+                    <div class="action_button">
+                        <% if Dislike.find_by(user_id: session[:user], post_id: posteach.id) %>
+                        <a  data-id='<%= posteach.id %>'  class="dislike_button">
+                           <i class="fa-solid fa-face-angry fa-xl dislike_status_<%= posteach.id %>" style="color: #cc787f;"></i>
+                        </a>
+                        <% else %>
+                        <a  data-id='<%= posteach.id %>'  class="dislike_button">
+                           <i class="fa-regular fa-face-angry fa-xl dislike_status_<%= posteach.id %>" style="color: #cc787f;"></i>
+                        </a>
+                        <% end %>
+                    </div>
+                    <p class="like_count dislike_count_<%= posteach.id %>"><%= Dislike.where(post_id: posteach.id).count %></p>
                 </div>
-                <p class="like_count like_count_<%= posteach.id %>"><%= Like.where(post_id: posteach.id).count %></p>
-                    
-                <div class="action_button">
-                    <% if Dislike.find_by(user_id: session[:user], post_id: posteach.id) %>
-                    <a  data-id='<%= posteach.id %>'  class="dislike_button">
-                       <i class="fa-solid fa-face-angry fa-2x dislike_status_<%= posteach.id %>" style="color: #d42a2a;"></i>
-                    </a>
-                    <% else %>
-                    <a  data-id='<%= posteach.id %>'  class="dislike_button">
-                       <i class="fa-regular fa-face-angry fa-2x dislike_status_<%= posteach.id %>" style="color: #d42a2a;"></i>
-                    </a>
-                    <% end %>
-                </div>
-                <p class="like_count dislike_count_<%= posteach.id %>"><%= Dislike.where(post_id: posteach.id).count %></p>
+                
+                <div class="fill_blank"></div>
+                
+                <% if posteach.user == current_user %>
+                <p class="btn_delete" data-post-id="<%= posteach.id %>" style="text-decoration: none;">
+                   <i class="fa-regular fa-trash-can" style="color: #8c8c8c;" ></i>
+                </p>
+                <% end %>
             
             </div>
-            <a href="/delete/<%= posteach.id %>" style="text-decoration: none; float: right;">
-               <i class="fa-regular fa-trash-can" style="color: red;" ></i>
-            </a>
+            
         </div>
     </div>
 <% end %>

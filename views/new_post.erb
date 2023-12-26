@@ -1,19 +1,20 @@
 <div>
     <form action="/new" method="post" >
-    <div>
-        <textarea type="text" name="content_set" placeholder="なにをやらかしましたか" class="input_content" cols="24" rows="3"></textarea><br>
-    </div>
-    <div>
-        <!--<select name="emotional_step_select">-->
-        <!--    <option value="kind">優しめ</option>-->
-        <!--    <option value="angry">厳しめ</option>-->
-        <!--</select>-->
-        <input type="radio" name="emotional_step_select" value="kind">優しめ
-        <input type="radio" name="emotional_step_select" value="normal">普通
-        <input type="radio" name="emotional_step_select" value="angry">厳しめ
-    </div>
-    <div>            
-        <input type="submit" value="反省する">
+    <div class="form_new_div">
+        <div class="textarea_wrap">
+            <textarea class="textarea_content" type="text" name="content_set" placeholder="なにをやらかしましたか" class="input_content" cols="24" rows="3"></textarea><br>
+        </div>
+        <div>
+            <input type="radio" name="emotional_step_select" value="kind" id="kind">
+            <label for="kind">優しめ</label>
+            <input type="radio" name="emotional_step_select" value="normal" id="normal">
+            <label for="normal">普通</label>
+            <input type="radio" name="emotional_step_select" value="angry" id="angry">
+            <label for="angry">厳しめ</label>
+        </div>
+        <div>            
+            <input type="submit" value="反省する" class="btn_hansei">
+        </div>
     </div>
     </form>
 </div>

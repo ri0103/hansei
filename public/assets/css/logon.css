@@ -1,0 +1,46 @@
+.logon_wrap{
+    width: 76%;
+    background: #383737;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 12px auto;
+}
+
+.logon_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input_user{
+    width: 80%;
+    height: 32px;
+    margin: 8px;
+    background: #424141;
+    color: #d4cdcd;
+}
+
+.btn_signon_submit{
+    width: 120px;
+    height: 40px;
+    border-radius: 15px;
+    background: #d9d7d7;
+}
+
+.profile_name{
+    margin-left: 12px;
+}
+
+.btn_signup, .btn_signin{
+    transition: 0.1s;
+    margin-top: 24px;
+    text-decoration: none;
+    color: #a1a1a1;
+}
+
+.btn_signup:hover, .btn_signin:hover{
+    transition: 0.3s;
+    text-decoration: underline;
+    font-weight: 600;
+    color: #c9c7c7
+}

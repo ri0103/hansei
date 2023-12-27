@@ -13,8 +13,8 @@ class User < ActiveRecord::Base
     has_many :posts
     has_many :likes
     has_many :dislikes
-    has_many :like_posts, through: :likes, source: :post
-    has_many :dislike_posts, through: :dislikes, source: :post
+    has_many :like_items, through: :likes, source: :post
+    has_many :dislike_items, through: :dislikes, source: :post
 
 end
 
@@ -28,10 +28,10 @@ end
 
 class Like < ActiveRecord::Base
     belongs_to :user
-    belongs_to :post
+    belongs_to :item
 end
 
 class Dislike < ActiveRecord::Base
     belongs_to :user
-    belongs_to :post
+    belongs_to :item
 end

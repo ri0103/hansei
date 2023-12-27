@@ -8,7 +8,7 @@ development:
 
 production:
   <<: *default
-  host: dpg-cm55e021hbls73ah56h0-a
-  database: c_original
-  username: c_original_user
-  password: X121kLP96R9hKd8TDudMEayR5WfhAruD
+  host: dpg-cm5mieed3nmc73cbkl40-a
+  database: c_original_6h65
+  username: c_original_6h65_user
+  password: JRNFGSW4aPFE7S19OpM7V7pFGlwCvbym

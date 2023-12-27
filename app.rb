@@ -117,10 +117,6 @@ post '/new' do
 
 end
 
-get '/view_posts' do
-    @posts = posts
-    erb :view_posts
-end
 
 get '/like' do
     if current_user

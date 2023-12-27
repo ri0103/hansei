@@ -4,7 +4,6 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.references :user
       t.string :content
       t.string :feedback
-      t.integer :likes
       t.timestamps null: false
     end
   end
